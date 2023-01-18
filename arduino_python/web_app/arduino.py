@@ -1,10 +1,4 @@
-#import serial
-#ser = serial.Serial('/dev/cu.usbmodem1201')  
-#print(ser.name)         
-#ser.write(bytes("x", 'utf-8'))
-#value = ser.readline() # reads from buffer until new line
-#print(value)          
-#ser.close()             
+# Question - Can you walk me through the usage of the output_buffer?
 
 # Importing Libraries
 import serial
@@ -49,20 +43,22 @@ class LED():
     def __init__(self) -> None:
         self.led_state = False
         self.arduino = SerialArduino()
+        self.arduino.start()
+    
+    def decoder(self):
+        if self.arduino.output_buffer[0] == "a":
+            self.led_state = True
+        else:
+             self.led_state = False
+        return self.led_state
 
-    def on():
-        
+    def on(self):
+        self.arduino.write("a")
+        return self.decoder()
 
-    def off():
-
-
-def led_on():
-    global output_buffer
-    output_buffer.append(ON)
-
-def led_off():
-    global output_buffer
-    output_buffer.append(OFF)
+    def off(self):
+        self.arduino.write("0")
+        return self.decoder()
 
 
 if __name__ == "__main__":

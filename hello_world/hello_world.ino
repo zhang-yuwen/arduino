@@ -13,10 +13,10 @@ void loop() {
     incomingByte = Serial.read();
 
     if (incomingByte == 97) {
-      Serial.println("lights_on");
+      Serial.println("True");
       digitalWrite(13, HIGH);
     }else{
-      Serial.println("lights_off");
+      Serial.println("False");
       digitalWrite(13, LOW);
     }
   }
